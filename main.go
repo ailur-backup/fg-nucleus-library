@@ -1,5 +1,9 @@
 package library
 
+import (
+        "github.com/google/uuid"
+)
+
 type OAuthInformation struct {
 	Token       string   `json:"token"`
 	Name        string   `json:"name"`
