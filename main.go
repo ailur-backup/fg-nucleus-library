@@ -12,3 +12,9 @@ type OAuthResponse struct {
 	AppID     string `json:"appId"`
 	SecretKey string `json:"secretKey"`
 }
+
+type File struct {
+	Name  string    `validate:"required"`
+	User  uuid.UUID `validate:"required"`
+	Bytes []byte    // Only used in write operations
+}
