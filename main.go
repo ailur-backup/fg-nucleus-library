@@ -1,7 +1,7 @@
 package library
 
 import (
-        "github.com/google/uuid"
+	"github.com/google/uuid"
 )
 
 type OAuthInformation struct {
@@ -21,4 +21,9 @@ type File struct {
 	Name  string    `validate:"required"`
 	User  uuid.UUID `validate:"required"`
 	Bytes []byte    // Only used in write operations
+}
+
+type Quota struct {
+	User  uuid.UUID `validate:"required"`
+	Bytes int64     `validate:"required"`
 }
