@@ -3,7 +3,7 @@ module git.ailur.dev/ailur/fg-nucleus-library
 go 1.23.3
 
 require (
-	git.ailur.dev/ailur/fg-library/v3 v3.5.0
+	git.ailur.dev/ailur/fg-library/v3 v3.6.2
 	github.com/google/uuid v1.6.0
 )
 

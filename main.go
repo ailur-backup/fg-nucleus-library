@@ -2,6 +2,7 @@ package library
 
 import (
 	"crypto/ed25519"
+	"fmt"
 	library "git.ailur.dev/ailur/fg-library/v3"
 	"github.com/google/uuid"
 	"time"
@@ -36,7 +37,7 @@ var (
 	OAuthService   = uuid.MustParse("00000000-0000-0000-0000-000000000004")
 )
 
-func OAuthSignup(oauth OAuthInformation, information library.ServiceInitializationInformation) (OAuthResponse, error) {
+func OAuthSignup(oauth OAuthInformation, information *library.ServiceInitializationInformation) (OAuthResponse, error) {
 	message, err := information.SendAndAwaitISMessage(OAuthService, 1, oauth, time.Second*3)
 	if err != nil {
 		return OAuthResponse{}, err
@@ -46,7 +47,7 @@ func OAuthSignup(oauth OAuthInformation, information library.ServiceInitializati
 
 }
 
-func GetPublicKey(information library.ServiceInitializationInformation) (ed25519.PublicKey, error) {
+func GetPublicKey(information *library.ServiceInitializationInformation) (ed25519.PublicKey, error) {
 	message, err := information.SendAndAwaitISMessage(OAuthService, 2, nil, time.Second*3)
 	if err != nil {
 		return nil, err
@@ -55,7 +56,7 @@ func GetPublicKey(information library.ServiceInitializationInformation) (ed25519
 	return message.Message.(ed25519.PublicKey), nil
 }
 
-func GetOAuthHostname(information library.ServiceInitializationInformation) (string, error) {
+func GetOAuthHostname(information *library.ServiceInitializationInformation) (string, error) {
 	message, err := information.SendAndAwaitISMessage(OAuthService, 0, nil, time.Second*3)
 	if err != nil {
 		return "", err
@@ -64,11 +65,13 @@ func GetOAuthHostname(information library.ServiceInitializationInformation) (str
 	return message.Message.(string), nil
 }
 
-func InitializeOAuth(oauth OAuthInformation, information library.ServiceInitializationInformation) (oauthResponse OAuthResponse, pk ed25519.PublicKey, hostname string, err error) {
+func InitializeOAuth(oauth OAuthInformation, information *library.ServiceInitializationInformation) (oauthResponse OAuthResponse, pk ed25519.PublicKey, hostname string, err error) {
+	fmt.Println("Initializing OAuth")
 	pk, err = GetPublicKey(information)
 	if err != nil {
 		return
 	}
+
 	hostname, err = GetOAuthHostname(information)
 	if err != nil {
 		return
