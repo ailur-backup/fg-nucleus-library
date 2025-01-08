@@ -2,7 +2,6 @@ package library
 
 import (
 	"crypto/ed25519"
-	"fmt"
 	library "git.ailur.dev/ailur/fg-library/v3"
 	"github.com/google/uuid"
 	"time"
@@ -66,7 +65,6 @@ func GetOAuthHostname(information *library.ServiceInitializationInformation) (st
 }
 
 func InitializeOAuth(oauth OAuthInformation, information *library.ServiceInitializationInformation) (oauthResponse OAuthResponse, pk ed25519.PublicKey, hostname string, err error) {
-	fmt.Println("Initializing OAuth")
 	pk, err = GetPublicKey(information)
 	if err != nil {
 		return
