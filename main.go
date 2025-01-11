@@ -22,9 +22,9 @@ type OAuthResponse struct {
 }
 
 type File struct {
-	Name   string           `validate:"required"`
-	User   uuid.UUID        `validate:"required"`
-	Reader io.LimitedReader // Only used for write operations
+	Name   string            `validate:"required"`
+	User   uuid.UUID         `validate:"required"`
+	Reader *io.LimitedReader // Only used for write operations
 }
 
 type Quota struct {
