@@ -4,6 +4,7 @@ import (
 	"crypto/ed25519"
 	library "git.ailur.dev/ailur/fg-library/v3"
 	"github.com/google/uuid"
+	"io"
 	"time"
 )
 
@@ -21,9 +22,9 @@ type OAuthResponse struct {
 }
 
 type File struct {
-	Name  string    `validate:"required"`
-	User  uuid.UUID `validate:"required"`
-	Bytes []byte    // Only used in write operations
+	Name   string           `validate:"required"`
+	User   uuid.UUID        `validate:"required"`
+	Reader io.LimitedReader // Only used for write operations
 }
 
 type Quota struct {
